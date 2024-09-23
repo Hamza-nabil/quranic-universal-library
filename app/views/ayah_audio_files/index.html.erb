@@ -7,15 +7,8 @@
 <div class="page-wrapper container-lg">
   <div class="page-section filters">
     <%= form_tag ayah_audio_files_path, method: :get, class: 'd-flex' do %>
-      <div class="form-group me-2">
-        <%= select_tag :filter_chapter, options_for_select(Chapter.order('id asc').map {|c| [c.humanize, c.id]}, params[:filter_chapter]), include_blank: true, class: 'form-select', data: { controller: 'select2' } %>
-        <p class="form-text">Filter by Surah</p>
-      </div>
-
-      <div class="form-group me-2">
-        <%= select_tag :verse_number, options_for_select(1..286, params[:verse_number]), include_blank: true, class: 'form-select', data: { controller: 'select2' } %>
-        <p class="form-text">Filter by Ayah</p>
-      </div>
+      
+      <%= render 'shared/surah_ayah_filter' %>
 
       <div class="form-group me-2">
         <%= select_tag :id, options_for_select(Recitation.all.map do |a|

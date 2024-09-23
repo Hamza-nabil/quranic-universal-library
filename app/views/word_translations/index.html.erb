@@ -25,16 +25,8 @@
         <p class="form-text">Filter by Juz/Para</p>
       </div>
 
-      <div class="form-group me-2">
-        <%= select_tag :filter_chapter, options_for_select(1..114, params[:filter_chapter]), include_blank: true, class: 'form-select', data: { placeholder: 'Filter by surah', controller: 'select2' } %>
-        <p class="form-text">Filter by Surah</p>
-      </div>
-
-      <div class="form-group me-2">
-        <%= select_tag :filter_verse, options_for_select(1..256, params[:filter_verse]), include_blank: true, class: 'form-select', data: { placeholder: 'Filter by surah', controller: 'select2' } %>
-        <p class="form-text">Filter by Ayah</p>
-      </div>
-
+      <%= render 'shared/surah_ayah_filter' %>
+      
       <div class="form-group">
         <%= submit_tag 'Filter', class: 'btn btn-success', data: { disable_with: 'Please wait..' } %>
       </div>

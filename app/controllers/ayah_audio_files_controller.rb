@@ -12,8 +12,8 @@ class AyahAudioFilesController < CommunityController
       files = files.where(chapter_id: params[:filter_chapter])
     end
 
-    if params[:verse_number].present?
-      files = files.where(verse_number: params[:verse_number])
+    if params[:filter_verse].present?
+      files = files.where(verse_number: params[:filter_verse])
     end
 
     @pagy, @audio_files = pagy(files.includes(:verse).order("#{sort_key} #{sort_order}"))

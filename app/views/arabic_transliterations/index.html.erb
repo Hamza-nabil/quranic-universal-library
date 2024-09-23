@@ -6,15 +6,8 @@
 <div class="page-wrapper container-lg">
   <div class="page-section filters">
     <%= form_tag arabic_transliterations_path, method: :get, class: 'd-flex' do %>
-      <div class="form-group me-2">
-        <%= select_tag :filter_chapter, options_for_select(1..114, params[:filter_chapter]), include_blank: true, class: 'form-select', data: { placeholder: 'Filter by surah' } %>
-        <p class="form-text">Filter by Surah</p>
-      </div>
-
-      <div class="form-group me-2">
-        <%= select_tag :filter_verse, options_for_select(1..114, params[:filter_verse]), include_blank: true, class: 'form-select', data: { placeholder: 'Filter by surah' } %>
-        <p class="form-text">Filter by Ayah</p>
-      </div>
+      
+      <%= render 'shared/surah_ayah_filter' %>
 
       <div class="form-group me-2">
         <%= select_tag :filter_progress, options_for_select([['Ayah with missing transliteration', 'missing'], ['Ayah with full transliteration', 'completed'], ['All ayah', 'all']], params[:filter_progress]), class: 'form-select', data: { placeholder: 'Filter by progress' } %>

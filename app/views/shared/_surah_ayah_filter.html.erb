@@ -1,0 +1,15 @@
+<% 
+chapters = Chapter.order('id asc').map do |c| 
+  [c.humanize, c.id]
+end
+%>
+
+<div class="form-group me-2">
+  <%= select_tag :filter_chapter, options_for_select(chapters, params[:filter_chapter]), include_blank: true, class: 'form-select', data: { placeholder: 'Filter by Surah', controller: 'select2' } %>
+  <p class="form-text">Filter by Surah</p>
+</div>
+
+<div class="form-group me-2">
+  <%= select_tag :filter_verse, options_for_select(1..286, params[:filter_verse]), include_blank: true, class: 'form-select', data: { placeholder: 'Filter by Ayah', controller: 'select2' } %>
+  <p class="form-text">Filter by Ayah</p>
+</div>
