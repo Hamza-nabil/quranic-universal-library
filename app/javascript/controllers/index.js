@@ -111,3 +111,6 @@ application.register("zoom-image", ZoomImageController);
 
 import TajweedAnnotatorController from './tajweed_annotator_controller';
 application.register("tajweed-annotator", TajweedAnnotatorController);
+
+import FilterController from './filter_controller';
+application.register("filter", FilterController)
