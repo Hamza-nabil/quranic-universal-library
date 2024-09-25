@@ -3,14 +3,24 @@ chapters = Chapter.order('id asc').pluck(:id, :name_simple, :verses_count)
 
 chapter_options = chapters.map { |id, name_simple, verse_count| ["#{id} - #{name_simple}", id] }
 chapters_verse_count = chapters.map { |id, _name_simple, verses_count| [id, verses_count] }.to_h
+
+
+selected_chapter = params[:filter_chapter]
+selected_verse = params[:filter_verse]
+
+verses_options = []
+if selected_chapter.present?
+  verse_count = chapters_verse_count[selected_chapter.to_i]
+  verses_options = (1..verse_count).to_a if verse_count
+end
 %>
 
 <div class="form-group me-2" data-controller="filter" data-filter-chapter-verses="<%= chapters_verse_count.to_json %>">
-  <%= select_tag :filter_chapter, options_for_select(chapter_options.map { |name, id, _| [name, id] }, params[:filter_chapter]), include_blank: true, class: 'form-select', data: { placeholder: 'Filter by Surah', action: 'change->filter#updateVerses'} %>
+  <%= select_tag :filter_chapter, options_for_select(chapter_options.map { |name, id, _| [name, id] }, params[:filter_chapter]), include_blank: true, class: 'form-select', data: { placeholder: 'Filter by Surah', action: 'change->filter#updateVerses', controller: 'select2'} %>
   <p class="form-text">Filter by Surah</p>
 </div>
 
 <div class="form-group me-2">
-  <%= select_tag :filter_verse, '', include_blank: true, class: 'form-select', id: 'filter_verse', data: { placeholder: 'Filter by Ayah', controller: 'select2' } %>
+  <%= select_tag :filter_verse, options_for_select(verses_options, selected_verse), include_blank: true, class: 'form-select', id: 'filter_verse', data: { placeholder: 'Filter by Ayah', controller: 'select2' } %>
   <p class="form-text">Filter by Ayah</p>
 </div>
